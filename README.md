@@ -72,7 +72,7 @@ pnpm i
 
 ## Autor ✒️
 
-- **Kenner Espinal**
+- **Camilo Sierra**
 
 ## Expresiones de Gratitud 🎁
 
