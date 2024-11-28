@@ -1,0 +1,194 @@
+<form [formGroup]="form">
+  <p-toast
+    [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+  />
+  <div>
+    <h1 class="text-blue-800 text-center">
+      <i
+        class="pi pi-user-edit"
+        style="font-size: 2rem; margin-right: 0.5rem"
+      ></i>
+      Editar Paciente
+    </h1>
+    <div
+      class="flex flex-wrap gap-5 align-items-center justify-content-center md:justify-content-start"
+    >
+      <p-floatLabel>
+        <input
+          id="cedula"
+          type="text"
+          pInputText
+          formControlName="cedula"
+          readonly
+        />
+        <label for="cedula">Cédula</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <label for="name">Nombres</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input
+          id="lastName"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="lastName">Apellidos</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="celular" type="text" pInputText formControlName="celular" />
+        <label for="celular">Celular</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">Correo</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="w-12rem">
+        <p-dropdown
+          [options]="generoOptions"
+          formControlName="genero"
+          [style]="{ width: '100%' }"
+          [showClear]="true"
+        ></p-dropdown>
+        <label for="float-label">Género</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="address" type="text" pInputText formControlName="address" />
+        <label for="address">Dirección</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <p-calendar
+          inputId="fechaNacimiento"
+          formControlName="fechaNacimiento"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+        />
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+      </p-floatLabel>
+
+      <p-dropdown
+        [options]="estadoCivilOptions"
+        formControlName="estadoCivil"
+        [style]="{ width: '100%' }"
+        [showClear]="true"
+        placeholder="Estado Civil"
+      ></p-dropdown>
+    </div>
+    <h2 class="text-blue-800 mb-2 mt-5 text-center">Antecendentes</h2>
+    <p class="text-center">
+      Tipo de Antecendentes (Seleccione los que presente.)
+    </p>
+    <div
+      class="flex flex-column md:flex-row md:align-content-center md:justify-content-center gap-3 mb-4"
+    >
+      <div *ngFor="let antecedente of antecedentes" class="field-checkbox">
+        <p-checkbox
+          [label]="antecedente.name"
+          name="group"
+          [value]="antecedente.key"
+          [(ngModel)]="selectedAntecedentes"
+          formControlName="antecedentes"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-4 align-items-center justify-content-center">
+    <p-floatLabel>
+      <input
+        id="otrosAntecedentes"
+        type="text"
+        pInputText
+        formControlName="otrosAntecedentes"
+      />
+      <label for="otrosAntecedentes">Otro (Opcional)</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        id="medicamentos"
+        type="text"
+        pInputText
+        formControlName="medicamentos"
+      />
+      <label for="medicamentos">Medicamentos</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="mt-4">
+    <h1 class="text-blue-800 text-center">Datos para el contrato</h1>
+
+    <div
+      class="flex flex-wrap gap-4 align-items-center justify-content-center mb-4"
+    >
+      <p-floatLabel>
+        <input type="text" pInputText formControlName="tratamiento" readonly />
+        <label for="username">Tratamiento</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="valorInicial"
+          [readonly]="true"
+          mode="currency"
+          currency="COP"
+        />
+        <label for="number-input">Cuota inicial</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="numeroCuotas"
+          [readonly]="true"
+        />
+        <label for="number-input">Número de cuotas</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="valorPorCuotas"
+          [readonly]="true"
+          mode="currency"
+          currency="COP"
+        />
+        <label for="number-input">Valor de las cuotas</label>
+      </p-floatLabel>
+    </div>
+    <app-contrato
+      (contractRejected)="handleContractRejected()"
+      [name]="form.get('name')?.value"
+      [lastname]="form.get('lastName')?.value"
+      [cedula]="form.get('cedula')?.value"
+      [tratamiento]="form.get('tratamiento')?.value"
+      [valorInicial]="form.get('valorInicial')?.value"
+      [numeroCuotas]="form.get('numeroCuotas')?.value"
+      [valorPorCuotas]="form.get('valorPorCuotas')?.value"
+    />
+  </div>
+
+  <div
+    class="flex flex-wrap gap-4 align-items-center justify-content-center mt-4"
+  >
+    <shared-button
+      (click)="editPaciente()"
+      color="warning"
+      label="Actualizar Paciente"
+      icon="pi pi-check-circle"
+      [disabled]="this.form.invalid"
+    />
+    <shared-button
+      (click)="this._router.navigate(['/admin/pacientes'])"
+      color="danger"
+      label="Salir"
+      icon="pi pi-times-circle"
+    />
+  </div>
+</form>

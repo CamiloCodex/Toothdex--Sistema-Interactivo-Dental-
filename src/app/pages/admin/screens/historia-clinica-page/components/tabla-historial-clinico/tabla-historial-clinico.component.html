@@ -1,0 +1,79 @@
+<div class="card">
+  <p-toast></p-toast>
+
+  <p-table
+    #dt
+    *ngIf="historialesClinicos"
+    [value]="historialesClinicos"
+    [rows]="6"
+    [paginator]="true"
+    [globalFilterFields]="['name']"
+    [tableStyle]="{ 'min-width': '75rem' }"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="Viendo {first} al {last} de {totalRecords} completamente"
+    [showCurrentPageReport]="true"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex flex-wrap align-items-center justify-content-center">
+        <p-iconField iconPosition="right">
+          <h1 class="text-teal-500 text-xl">
+            Histalial Clínico de:
+            <span class="text-teal-500">
+              {{ paciente.name | titlecase }}
+              {{ paciente.lastName | titlecase }}
+            </span>
+          </h1>
+        </p-iconField>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="min-width: 10rem">Fecha de consulta</th>
+        <th style="min-width: 10rem">Remitido Por</th>
+        <th pSortableColumn="name" style="min-width: 10rem">
+          Motivo de Consulta
+        </th>
+        <th style="min-width: 10rem">Diagnóstico</th>
+        <th style="min-width: 10rem">Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-historiaClinica>
+      <tr>
+        <td>
+          {{ historiaClinica.fechaConsulta | date : "dd" }},
+          {{ historiaClinica.fechaConsulta | date : "MMMM" }}
+          {{ historiaClinica.fechaConsulta | date : "hh:mm a" }}
+        </td>
+        <td>{{ historiaClinica.remitido }}</td>
+        <td>
+          {{ historiaClinica.motivoConsulta | titlecase }}
+        </td>
+        <td>{{ historiaClinica.diagnosticos.observaciones }}</td>
+        <td>
+          <div class="flex gap-2">
+            <button
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-eye"
+              class="p-button-rounded p-button-help"
+              label="Ver Historia Clínica"
+              (click)="editHistoriaClinica(historiaClinica)"
+            ></button>
+          </div>
+        </td>
+      </tr></ng-template
+    >
+
+    <ng-template pTemplate="summary">
+      <div class="flex align-items-center justify-content-between">
+        En total hay
+        {{ historialesClinicos ? historialesClinicos.length : 0 }} historias
+        clinicas
+      </div>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

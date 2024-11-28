@@ -1,0 +1,162 @@
+<public-menu />
+<section id="inicio">
+  <p-panel class="p-3">
+    <div
+      class="flex flex-column-reverse md:flex-row align-items-center justify-content-center gap-8 max-w-6xl mx-auto"
+    >
+      <div class="flex flex-column w-full md:w-30rem">
+        <h1
+          class="text-primary font-bold text-center md:text-left text-3xl md:text-6xl mb-3"
+        >
+          ¡Sonríe con confianza!
+        </h1>
+        <p class="text-lg text-secondary mb-4 text-justify">
+          Transformamos sonrisas y cambiamos vidas con un enfoque único en
+          odontología de calidad. Creemos que cada sonrisa cuenta y merece una
+          atención personalizada que refleje dedicación, cuidado y excelencia.
+          Nos esforzamos por ofrecer experiencias que combinan innovación y
+          humanidad, logrando resultados que no solo embellecen sonrisas, sino
+          que también enriquecen vidas. Descubre cómo hacemos de cada visita una
+          oportunidad para brindar bienestar y confianza
+        </p>
+
+        <div class="flex flex-column md:flex-row gap-4 mb-4">
+          <div class="flex align-items-center gap-3">
+            <i class="pi pi-building text-primary text-2xl"></i>
+            <div>
+              <p class="font-bold text-md m-0">Consultorio Odontológico</p>
+              <span>Toothdex Camilo Sierra</span>
+            </div>
+          </div>
+
+          <div class="flex align-items-center gap-3">
+            <i class="pi pi-map-marker text-primary text-2xl"></i>
+            <div>
+              <p class="font-bold text-md m-0">Dirección</p>
+              <span> Valledupar - Cesar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-content-center md:justify-content-start">
+          <p-button
+            label="Llama Ahora"
+            icon="pi pi-phone"
+            severity="info"
+            class="p-button-rounded p-button-lg shadow-3"
+            (click)="onCallClick()"
+          ></p-button>
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="flex-shrink-0 w-full md:w-4">
+        <div class="relative" style="padding-bottom: 100%">
+          <img
+            src="/assets/imagen1.png"
+            alt="Consultorio Odontológico"
+            class="absolute top-0 left-0 w-full h-full object-cover border-round-xl shadow-3"
+            style="object-fit: cover"
+          />
+        </div>
+      </div>
+    </div>
+  </p-panel>
+</section>
+
+<section class="py-8 px-3" id="conocenos">
+  <div class="max-w-7xl mx-auto">
+    <!-- Encabezado -->
+    <div class="text-center mb-6">
+      <span class="text-primary font-bold text-4X1 mb-2 block">CONÓCENOS</span>
+      <h2 class="text-4xl font-bold text-900 mb-2">Nuestra Misión y Visión</h2>
+      <p class="text-secondary text-xl line-height-3 mx-auto max-w-5xl">
+        Comprometidos con la excelencia en salud dental y el bienestar de
+        nuestros pacientes.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid gap-6 justify-content-center">
+      @for (item of cards; track item.title) {
+      <div class="col-12 md:col-6 lg:col-4">
+        <public-card
+          [title]="item.title"
+          [description]="item.description"
+        ></public-card>
+      </div>
+      } @empty {
+      <div class="col-12 text-center">
+        <p>No hay contenido disponible.</p>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="py-8 px-3 bg-gray-50" id="servicios">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-6">
+      <span class="text-primary font-bold text-6X1 mb-2 block"
+        >NUESTROS SERVICIOS</span
+      >
+      <h2 class="text-4xl font-bold text-900 mb-2">Servicios Odontológicos</h2>
+      <p class="text-secondary text-xl line-height-3 mx-auto max-w-5xl">
+        Ofrecemos una amplia gama de servicios dentales especializados para toda
+        la familia
+      </p>
+    </div>
+
+    <div class="grid">
+      @for (item of infoServices; track item.description) {
+      <div class="col-12 sm:col-6 lg:col-4 xl:col-3">
+        <public-card-info
+          [title]="item.title"
+          [description]="item.description"
+          [img]="item.icon"
+        />
+      </div>
+      } @empty {
+      <div class="col-12 text-center">No hay servicios disponibles.</div>
+      }
+    </div>
+  </div>
+</section>
+
+<section id="Contacto">
+  <app-location />
+</section>
+
+<p-button
+  icon="pi pi-whatsapp"
+  severity="success"
+  styleClass="p-button-rounded p-button-lg shadow-3 flex align-items-center justify-content-center fixed bottom-4 right-4 z-50"
+  (click)="onWhatsAppClick()"
+></p-button>
+
+<div
+  style="
+    border-radius: 6px 6px 6px 6px;
+    bottom: 20px;
+    right: 20px;
+    margin-left: 10px;
+    padding: 10px 0 0;
+    position: fixed;
+    text-align: center;
+    width: 90px;
+    z-index: 15;
+  "
+>
+  <p>
+    <a href="https://api.whatsapp.com/send?phone=573046426769" target="_blank">
+      <img
+        src="/assets/whatsapp.png"
+        width="90"
+        height="90"
+        alt="Mi WhatsApp"
+      />
+    </a>
+  </p>
+</div>
+
+<shared-footer />

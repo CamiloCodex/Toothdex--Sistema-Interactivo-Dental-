@@ -1,0 +1,24 @@
+<p-menubar [model]="menuItems">
+  <ng-template pTemplate="start">
+    <img src="./assets/logo.png" class="mr-2 h-3rem md:h-5rem" />
+  </ng-template>
+  <ng-template pTemplate="end">
+    <div class="flex align-items-center justify-content-center">
+      <!-- <i class="pi pi-bell text-2xl mr-3" pBadge severity="danger"></i> -->
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+        label="{{ user?.name[0] }}"
+        styleClass="mr-1 bg-teal-400 font-bold text-white"
+        shape="circle"
+      ></p-avatar>
+      <p
+        class="hidden md:block align-items-center justify-content-center border-round mr-3 font-bold"
+      >
+        {{ user?.name }}
+      </p>
+    </div>
+  </ng-template>
+</p-menubar>
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>

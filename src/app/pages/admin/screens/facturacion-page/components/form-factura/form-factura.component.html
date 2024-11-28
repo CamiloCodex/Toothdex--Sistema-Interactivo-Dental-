@@ -1,0 +1,274 @@
+<h1 class="text-center text-blue-800">Registrar Nueva Factura</h1>
+<form [formGroup]="form" class="grid mt-4 mb-4">
+  <div class="col">
+    <div class="flex flex-wrap align-items-center justify-content-center gap-4">
+      <p-floatLabel>
+        <input
+          id="username"
+          type="text"
+          pInputText
+          formControlName="servicioRealizado"
+        />
+        <label for="username">Servicios Realizados</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input
+          id="username"
+          type="number"
+          pInputText
+          formControlName="costoServicio"
+        />
+        <label for="username">Costo del Servicio</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <input id="username" type="number" pInputText formControlName="abono" />
+        <label for="username">Abono</label>
+      </p-floatLabel>
+    </div>
+    <div
+      *ngIf="form.errors?.['abonoMayorQueCosto'] && form.get('abono')?.touched"
+      class="text-center mt-2"
+    >
+      <span class="text-red-600"
+        >El abono no puede ser mayor al costo del servicio.</span
+      >
+    </div>
+    <div class="flex align-items-center justify-content-center mt-4">
+      <shared-button
+        label="Guardar Factura"
+        icon="pi pi-plus"
+        color="info"
+        (click)="saveFactura()"
+        [disabled]="form.invalid"
+      />
+      <shared-button
+        label="Salir"
+        icon="pi pi-times-circle"
+        (click)="_uS.routerLink('/admin/facturacion/factura')"
+        color="danger"
+      />
+    </div>
+  </div>
+</form>
+
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>
+@if (facturas.length > 0) {<p-table
+  [value]="facturas"
+  dataKey="id"
+  editMode="row"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  styleClass="p-datatable-gridlines"
+  [scrollable]="true"
+  scrollHeight="520px"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="46"
+  #dt
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th rowspan="3">Facturas</th>
+      <th colspan="6">Número de servicios: {{ facturas.length }}</th>
+    </tr>
+    <tr>
+      <th colspan="2">
+        Ganancias: {{ getGanacias() | currency : "USD" : "symbol" : "1.2-2" }}
+      </th>
+      <th colspan="2">
+        Abonos total: {{ getAbonos() | currency : "USD" : "symbol" : "1.2-2" }}
+      </th>
+      <th colspan="2">
+        Deuda total:
+        {{
+          getGanacias() - getAbonos() | currency : "USD" : "symbol" : "1.2-2"
+        }}
+      </th>
+    </tr>
+    <tr>
+      <th>Fecha</th>
+      <th>Servicio Realizado</th>
+      <th>Costo del servicio</th>
+      <th>Abono</th>
+      <th>Deuda</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-factura
+    let-editing="editing"
+    let-ri="rowIndex"
+  >
+    <tr [pEditableRow]="factura">
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="factura.id"
+              required
+              [disabled]="true"
+              [readOnly]="true"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ factura.id }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <p-calendar
+              [(ngModel)]="factura.fechaCreacion"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              [showTime]="true"
+              dateFormat="dd/mm/yy"
+              appendTo="body"
+              [hourFormat]="hourFormat"
+              [disabled]="true"
+            ></p-calendar>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ factura.fechaCreacion | date : "dd" }},
+            {{ factura.fechaCreacion | date : "MMMM" }}
+            {{ factura.fechaCreacion | date : "hh:mm a" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="factura.servicioRealizado"
+              required
+              [disabled]="true"
+              [readOnly]="true"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ factura.servicioRealizado }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="factura.costoServicio"
+              required
+              [disabled]="true"
+              [readOnly]="true"
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ factura.costoServicio | currency : "USD" : "symbol" : "1.2-2" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="number"
+              [(ngModel)]="factura.abono"
+              required
+            />
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ factura.abono | currency : "USD" : "symbol" : "1.2-2" }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+
+      <td>
+        <p-cellEditor>
+          <ng-template pTemplate="output">
+            {{
+              factura.costoServicio - factura.abono
+                | currency : "USD" : "symbol" : "1.2-2"
+            }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+
+      <td>
+        <div class="flex gap-2">
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            pInitEditableRow
+            icon="pi pi-pencil"
+            (click)="onRowEditInit(factura)"
+            class="p-button-rounded"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pSaveEditableRow
+            icon="pi pi-check"
+            (click)="editFactura(factura)"
+            class="p-button-rounded p-button-text p-button-success mr-2"
+          ></button>
+          <button
+            *ngIf="editing"
+            pButton
+            pRipple
+            type="button"
+            pCancelEditableRow
+            icon="pi pi-times"
+            (click)="onRowEditCancel(factura, ri)"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+          <button
+            *ngIf="!editing"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-print"
+            class="p-button-rounded p-button-help"
+            (click)="exportPdf(factura)"
+          ></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <tr>
+      <td colspan="3" class="text-right">Totales</td>
+      <td>{{ getGanacias() | currency : "USD" }}</td>
+      <td>{{ getAbonos() | currency : "USD" }}</td>
+      <td>{{ getGanacias() - getAbonos() | currency : "USD" }}</td>
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          icon="pi pi-file-pdf"
+          (click)="exportPdf()"
+          class="p-button-warning mr-2"
+          pTooltip="PDF"
+          tooltipPosition="bottom"
+        ></button>
+      </td>
+    </tr>
+  </ng-template> </p-table
+>} @else {
+<div class="flex justify-content-center align-items-center">
+  <h1 class="text-blue-800">No hay facturas registradas</h1>
+</div>
+}

@@ -1,0 +1,426 @@
+<h1 class="text-center text-blue-800 mb-5">
+  {{ !historiaClinica ? "Crear Historia Clinica" : "Historia Clínica" }}
+</h1>
+
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="grid">
+    <div class="col">
+      <div
+        class="flex flex-wrap gap-5 align-items-center justify-content-center md:justify-content-start"
+      >
+        <p-floatLabel>
+          <input
+            id="remitido"
+            type="text"
+            pInputText
+            formControlName="remitido"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="remitido">Remitido Por</label>
+        </p-floatLabel>
+
+        <p-floatLabel>
+          <input
+            id="motivoConsulta"
+            type="text"
+            pInputText
+            formControlName="motivoConsulta"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="motivoConsulta">Motivo de Consulta</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-12rem">
+          <p-dropdown
+            [options]="selectedSN"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="ruidoArticular"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Ruido Artcular</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedExamenFrontal"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="examenFrontal"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Exámen de frente</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-10rem">
+          <p-dropdown
+            [options]="selectedSN"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="asimetria"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Asimetría</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-12rem">
+          <p-dropdown
+            [options]="selectedPerfil"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="perfil"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Perfil</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-12rem">
+          <p-dropdown
+            [options]="selectedPosicionLabial"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="posicionLabial"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Posicion labial</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedHabitos"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="habitos"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Hábitos</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedHiperhipotomia"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="hiperhipotomia"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Hipertomía - Hipotomía</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedSN"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="dolorArticular"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Dolor Articular</label>
+        </p-floatLabel>
+
+        <p-floatLabel>
+          <input
+            id="dientes"
+            type="number"
+            pInputText
+            formControlName="dientes"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="dientes">Dientes</label>
+        </p-floatLabel>
+      </div>
+    </div>
+  </div>
+
+  <p-divider type="solid" />
+
+  <div class="grid">
+    <div class="col-12 md:col-6">
+      <h2 class="text-center text-blue-800 mb-4">Diagnóstico Esquelético</h2>
+      <div
+        class="flex flex-wrap gap-4 align-items-center justify-content-center"
+        formGroupName="diagEsqueletico"
+      >
+        <p-floatLabel>
+          <input
+            id="diagnosticoEsqueletico"
+            type="text"
+            pInputText
+            formControlName="diagnosticoEsqueletico"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="diagnosticoEsqueletico">Diagnóstico Esquelético</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="prognatismo"
+            type="text"
+            pInputText
+            formControlName="prognatismo"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="prognatismo">Prognatismo Total</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="retrognatismo"
+            type="text"
+            pInputText
+            formControlName="retrognatismo"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="retrognatismo">Retrognatismo Total</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="tipoCrecimiento"
+            type="text"
+            pInputText
+            formControlName="tipoCrecimiento"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="tipoCrecimiento">Tipo de Crecimiento</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="alturaFacial"
+            type="text"
+            pInputText
+            formControlName="alturaFacial"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="alturaFacial">Altura Facial</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="macrognatismo"
+            type="text"
+            pInputText
+            formControlName="macrognatismo"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="macrognatismo">Macrognatismo</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="micrognatismo"
+            type="text"
+            pInputText
+            formControlName="micrognatismo"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="micrognatismo">Micrognatismo</label>
+        </p-floatLabel>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <h2 class="text-center text-blue-800 mb-4">
+        Diagnóstico Radiográfico Dentario Cefalométrico
+      </h2>
+      <div
+        class="flex flex-wrap gap-4 align-items-center justify-content-center"
+        formGroupName="diagRadiograficoDentario"
+      >
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedIS"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="protuccion"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Protuccion Alveolar</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedIS"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="retruccion"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Retruccion Alveolar</label>
+        </p-floatLabel>
+      </div>
+      <h2 class="text-center text-blue-800 mb-4">
+        Diagnóstico Radiográfico De Tejidos Blandos
+      </h2>
+      <div
+        class="flex gap-4 align-items-center justify-content-center"
+        formGroupName="diagEsqueleticoTejidos"
+      >
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedPerfil"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="tiposPerfil"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Tipos de perfil</label>
+        </p-floatLabel>
+      </div>
+    </div>
+    <div class="col-12 md:col">
+      <h2 class="text-center text-blue-800 mb-5">Posición Labial</h2>
+
+      <div
+        class="flex flex-wrap gap-4 align-items-center justify-content-center"
+        formGroupName="posicionLabialForm"
+      >
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedIS"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="posicionLabialProquelia"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Posición Labial Proquelia</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedIS"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="posicionLabialRetroquelia"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Posición Labial Retroquelia</label>
+        </p-floatLabel>
+      </div>
+    </div>
+  </div>
+
+  <p-divider type="solid" />
+
+  <h1 class="text-center text-blue-800">Diagnóstico</h1>
+  <div class="grid">
+    <div class="col-12 mb-4">
+      <div
+        class="flex flex-wrap gap-4 align-items-center justify-content-center"
+        formGroupName="diagnosticos"
+      >
+        <p-floatLabel>
+          <input
+            id="facial"
+            type="text"
+            pInputText
+            formControlName="facial"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="facial">Facial</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="funcional"
+            type="text"
+            pInputText
+            formControlName="funcional"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="funcional">Funcional</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="esqueletico"
+            type="text"
+            pInputText
+            formControlName="esqueletico"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="esqueletico">Esquelético</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="dental"
+            type="text"
+            pInputText
+            formControlName="dental"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="dental">Dental</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="planTratamiento"
+            type="text"
+            pInputText
+            formControlName="planTratamiento"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="planTratamiento">Plan de Tratamiento</label>
+        </p-floatLabel>
+
+        <p-floatLabel class="w-18rem">
+          <p-dropdown
+            [options]="selectedSN"
+            [style]="{ width: '100%' }"
+            [showClear]="true"
+            formControlName="conExtracciones"
+            [readonly]="historiaClinica ? true : false"
+          ></p-dropdown>
+          <label for="float-label">Con extracciones</label>
+        </p-floatLabel>
+
+        <p-floatLabel>
+          <input
+            id="posiblesExtracciones"
+            type="text"
+            pInputText
+            formControlName="posiblesExtracciones"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="posiblesExtracciones">Posibles Extracciones</label>
+        </p-floatLabel>
+        <p-floatLabel>
+          <input
+            id="observaciones"
+            type="text"
+            pInputText
+            formControlName="observaciones"
+            [readonly]="historiaClinica ? true : false"
+          />
+          <label for="observaciones">Observaciones</label>
+        </p-floatLabel>
+      </div>
+    </div>
+    <div class="col">
+      <div
+        class="flex flex-wrap gap-2 align-items-center justify-content-center"
+      >
+        <shared-button
+          [hidden]="historiaClinica"
+          [label]="
+            !historiaClinica
+              ? 'Guardar Historia Clínica'
+              : 'Actualizar Historia Clínica'
+          "
+          [icon]="!historiaClinica ? 'pi pi-save' : 'pi pi-refresh'"
+          [color]="!historiaClinica ? 'success' : 'warning'"
+          [disabled]="this.form.invalid"
+          type="submit"
+        />
+        <shared-button
+          [hidden]="historiaClinica"
+          label="Limpiar Campos"
+          icon="pi pi-trash"
+          color="help"
+          (click)="cleanForm()"
+        />
+        <shared-button
+          label="Salir"
+          icon="pi pi-times-circle"
+          color="danger"
+          (click)="this._router.navigate(['/admin/historias-clinicas/'])"
+        />
+      </div>
+    </div>
+  </div>
+</form>

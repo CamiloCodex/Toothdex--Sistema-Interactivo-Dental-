@@ -1,0 +1,217 @@
+<form [formGroup]="form">
+  <p-toast
+    [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+  />
+  <div>
+    <h1 class="text-blue-800 text-center">
+      <i
+        class="pi pi-user-plus"
+        style="font-size: 2rem; margin-right: 0.5rem"
+      ></i>
+      Craer Paciente
+    </h1>
+    <div
+      class="flex flex-wrap gap-5 align-items-center justify-content-center md:justify-content-start"
+    >
+      <p-floatLabel>
+        <input id="cedula" type="text" pInputText formControlName="cedula" />
+        <label for="cedula">Cédula</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <label for="name">Nombres</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input
+          id="lastName"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="lastName">Apellidos</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="celular" type="text" pInputText formControlName="celular" />
+        <label for="celular">Celular</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">Correo</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="w-12rem">
+        <p-dropdown
+          [options]="generoOptions"
+          formControlName="genero"
+          [style]="{ width: '100%' }"
+          [showClear]="true"
+        ></p-dropdown>
+        <label for="float-label">Género</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <input id="address" type="text" pInputText formControlName="address" />
+        <label for="address">Dirección</label>
+      </p-floatLabel>
+
+      <p-floatLabel>
+        <p-calendar
+          inputId="fechaNacimiento"
+          formControlName="fechaNacimiento"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+        />
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+      </p-floatLabel>
+
+      <p-floatLabel class="w-12rem">
+        <p-dropdown
+          [options]="estadoCivilOptions"
+          formControlName="estadoCivil"
+          [style]="{ width: '100%' }"
+          [showClear]="true"
+        ></p-dropdown>
+        <label for="float-label">Estado Civil</label>
+      </p-floatLabel>
+    </div>
+    <h2 class="text-blue-800 mb-2 mt-5 text-center">Antecendentes</h2>
+    <p class="text-center">
+      Tipo de Antecendentes (Seleccione los que presente.)
+    </p>
+    <div
+      class="flex flex-column md:flex-row md:justify-content-center md:align-items-center gap-3 mb-4"
+    >
+      <div *ngFor="let antecedente of antecedentes" class="field-checkbox">
+        <p-checkbox
+          [label]="antecedente.name"
+          name="group"
+          [value]="antecedente"
+          [(ngModel)]="selectedAntecedentes"
+          formControlName="antecedentes"
+        ></p-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="col md:col-4 mt-4 mb-8">
+    <div
+      class="flex flex-column gap-4 align-items-center justify-content-center"
+    >
+      <p-avatar
+        icon="pi pi-user"
+        styleClass="mr-2"
+        size="xlarge"
+        shape="circle"
+      ></p-avatar>
+      <p-fileUpload
+        mode="basic"
+        chooseLabel="Cargar Fotografía"
+        name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*"
+        [maxFileSize]="1000000"
+      ></p-fileUpload>
+    </div>
+  </div> -->
+
+  <div class="flex flex-wrap gap-4 align-items-center justify-content-center">
+    <p-floatLabel>
+      <input
+        id="username"
+        type="text"
+        pInputText
+        formControlName="otrosAntecedentes"
+      />
+      <label for="username">Otro (Opcional)</label>
+    </p-floatLabel>
+    <p-floatLabel>
+      <input
+        id="username"
+        type="text"
+        pInputText
+        formControlName="medicamentos"
+      />
+      <label for="username">Medicamentos</label>
+    </p-floatLabel>
+  </div>
+
+  <div class="mt-4">
+    <h1 class="text-blue-800 text-center">Datos para el contrato</h1>
+
+    <div
+      class="flex flex-wrap gap-4 align-items-center justify-content-center mb-4"
+    >
+      <p-floatLabel>
+        <input type="text" pInputText formControlName="tratamiento" />
+        <label for="username">Tratamiento</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="valorInicial"
+          [minFractionDigits]="2"
+          mode="currency"
+          currency="COP"
+        />
+        <label for="number-input">Cuota inicial</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="integeronly"
+          formControlName="numeroCuotas"
+        />
+        <label for="number-input">Número de cuotas</label>
+      </p-floatLabel>
+      <p-floatLabel>
+        <p-inputNumber
+          inputId="valorPorCuotas"
+          formControlName="valorPorCuotas"
+          [readonly]="true"
+          [minFractionDigits]="2"
+          mode="currency"
+          currency="COP"
+        ></p-inputNumber>
+        <label for="valorPorCuotas">Valor de las cuotas</label>
+      </p-floatLabel>
+    </div>
+    <app-contrato
+      (contractAccepted)="handleContractAccepted()"
+      (contractRejected)="handleContractRejected()"
+      [name]="form.get('name')?.value"
+      [lastname]="form.get('lastName')?.value"
+      [cedula]="form.get('cedula')?.value"
+      [tratamiento]="form.get('tratamiento')?.value"
+      [valorInicial]="form.get('valorInicial')?.value"
+      [numeroCuotas]="form.get('numeroCuotas')?.value"
+      [valorPorCuotas]="form.get('valorPorCuotas')?.value"
+    />
+  </div>
+
+  <div
+    class="flex flex-wrap gap-3 align-items-center justify-content-center mt-4"
+  >
+    <shared-button
+      (click)="addPaciente()"
+      label="Guardar Paciente"
+      icon="pi pi-plus-circle"
+      [disabled]="form.invalid"
+    />
+    <shared-button
+      (click)="cancelForm()"
+      label="Limpiar Campos"
+      icon="pi pi-trash"
+      color="warning"
+    />
+    <shared-button
+      (click)="this._router.navigate(['/admin/pacientes'])"
+      label="Salir"
+      icon="pi pi-times-circle"
+      color="danger"
+    />
+  </div>
+</form>

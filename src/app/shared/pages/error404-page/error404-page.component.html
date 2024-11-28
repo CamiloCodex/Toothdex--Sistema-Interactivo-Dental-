@@ -1,0 +1,35 @@
+<div
+  class="h-screen flex justify-content-center align-items-center"
+  style="
+    background-image: url('./assets/fondo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  "
+>
+  <p-card
+    header="Error 404"
+    subheader="El recurso no se encuentra disponible"
+    [style]="{ width: '360px' }"
+  >
+    <ng-template pTemplate="header">
+      <img alt="Card" src="./assets/logo.png" />
+    </ng-template>
+    <p>
+      Lamentamos informarte que el recurso que intentas acceder no se encuentra
+      disponible en estos momentos.
+    </p>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3 mt-1">
+        <p-button
+          icon="pi pi-arrow-left"
+          severity="info"
+          label="Volver"
+          class="w-full"
+          styleClass="w-full"
+          (click)="_uS.routerLink('/auth')"
+        />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

@@ -1,0 +1,22 @@
+<div class="grid grid-nogutter surface-section text-800 min-h-screen">
+  <!-- Left Content Section -->
+  <div class="col-12 md:col-6 p-6 flex flex-column justify-content-center">
+    <div class="text-6xl text-blue-800 font-bold mb-4">ToothDex</div>
+    <div class="text-2xl text-600 mb-6">Software de gestión odontológica</div>
+
+    <div class="mt-6">
+      <router-outlet />
+    </div>
+  </div>
+
+  <!-- Right Image Section -->
+  <div class="col-12 md:col-6 overflow-hidden relative">
+    <div class="absolute top-0 left-0 w-full h-full bg-primary-50 transform -skew-x-12 origin-top-right"></div>
+    <img
+      src="assets/foto-l.avif"
+      alt="Hero Image"
+      class="md:ml-auto block md:h-full relative z-1 transform scale-110"
+      style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)"
+    />
+  </div>
+</div>

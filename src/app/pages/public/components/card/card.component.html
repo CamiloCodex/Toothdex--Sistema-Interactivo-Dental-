@@ -1,0 +1,23 @@
+<p-card [styleClass]="'h-full shadow-4 border-round-2xl hover:shadow-8 transition-all transition-duration-300'">
+  <div class="flex flex-column gap-4 h-full">
+    <div class="flex align-items-center gap-3">
+      <div class="w-3rem h-3rem flex align-items-center justify-content-center bg-primary border-round-xl">
+        <i [class]="title === 'Misión' ? 'pi pi-compass text-white text-2xl' : 'pi pi-eye text-white text-2xl'"></i>
+      </div>
+      <h2 class="text-xl font-bold text-primary m-0">{{title}}</h2>
+    </div>
+
+    <div class="line-height-3 text-secondary text-lg">
+      {{description}}
+    </div>
+
+    <div class="mt-auto pt-3">
+      <p-button
+        [label]="'Conoce más sobre nuestra ' + title.toLowerCase()"
+        styleClass="p-button-rounded p-button-outlined"
+        [icon]="title === 'Misión' ? 'pi pi-arrow-right' : 'pi pi-arrow-right'"
+        iconPos="right">
+      </p-button>
+    </div>
+  </div>
+</p-card>

@@ -1,0 +1,75 @@
+<p-card [style]="{ width: '360px' }">
+  <div class="flex justify-content-center align-items-center mb-4">
+    <i class="pi pi-user m-2" style="font-size: 2.5rem"></i>
+    <h1>Registrarse</h1>
+  </div>
+  <form [formGroup]="registerForm" class="flex flex-column">
+    <div class="flex flex-column gap-4">
+      <div>
+        <p-floatLabel>
+          <input
+            id="name"
+            formControlName="name"
+            type="text"
+            pInputText
+            class="w-19rem"
+          />
+          <label for="name">Nombre completo</label>
+        </p-floatLabel>
+      </div>
+      <div>
+        <p-floatLabel>
+          <input
+            id="username"
+            formControlName="email"
+            type="text"
+            pInputText
+            class="w-19rem"
+          />
+          <label for="username">Correo</label>
+        </p-floatLabel>
+      </div>
+      <p-floatLabel>
+        <span class="p-float-label w-full">
+          <p-password
+            [feedback]="false"
+            formControlName="password"
+            [toggleMask]="true"
+          ></p-password>
+          <label for="password">Contraseña</label>
+        </span>
+      </p-floatLabel>
+    </div>
+    <div class="m-2">
+      <a routerLink="/auth/login" class="underline cursor-pointer text-sm"
+        >Ya tienes una cuenta?</a
+      >
+    </div>
+    <p-divider></p-divider>
+
+    <div class="mt-2 flex align-items-center justify-content-center">
+      <shared-button
+        label="Registrarme"
+        icon="pi pi-user-plus"
+        (click)="signUp()"
+        color="info"
+        [rounded]="true"
+        [outlined]="true"
+        [disabled]="registerForm.invalid"
+      ></shared-button>
+    </div>
+    <div class="mt-4 flex align-items-center justify-content-center">
+      <shared-button
+        label=""
+        icon="pi pi-arrow-left"
+        (click)="this._router.navigate(['/public/home'])"
+        color="help"
+        [rounded]="true"
+        [outlined]="true"
+      ></shared-button>
+    </div>
+  </form>
+</p-card>
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>

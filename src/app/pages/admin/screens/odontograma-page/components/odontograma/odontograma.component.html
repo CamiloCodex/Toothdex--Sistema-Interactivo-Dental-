@@ -1,0 +1,400 @@
+<div class="grid">
+  <div class="col md:col-12">
+    <div class="flex flex-wrap align-items-center justify-content-center">
+      <ul class="list-none flex flex-wrap gap-2">
+        <li *ngFor="let enfermedad of enfermedades; let i = index">
+          <div
+            class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 border-round border-1"
+            [ngClass]="getColorPorEnfermedad(enfermedad.value)"
+          >
+            {{ enfermedad.label }}
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="flex flex-wrap align-items-center justify-content-center">
+      <div id="contenedorSuperior">
+        <div class="flex flex-wrap justify-content-between">
+          <h2 class="text-blue-800">Izquierdo</h2>
+          <h2 class="text-blue-800">Vestibular</h2>
+          <h2 class="text-blue-800">Derecho</h2>
+        </div>
+        <div class="flex flex-wrap gap-1">
+          <div
+            *ngFor="let diente of teethLeft; let i = index"
+            (click)="[openModal(diente)]"
+            class="cursor-pointer"
+          >
+            <p class="text-center">{{ diente }}</p>
+            <div class="flex flex-column align-items-center border-2">
+              <div
+                class="border-2 m-auto p-2 w-full"
+                [ngClass]="getCaraClase(diente, 'caraVestibular')"
+              ></div>
+              <div class="flex">
+                <div
+                  class="border-2 m-auto p-2"
+                  [ngClass]="getCaraClase(diente, 'caraMesial')"
+                ></div>
+                <div
+                  class="border-2 m-auto p-2"
+                  [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                ></div>
+                <div
+                  class="border-2 m-auto p-2"
+                  [ngClass]="getCaraClase(diente, 'caraDistal')"
+                ></div>
+              </div>
+              <div
+                class="border-2 m-auto p-2 w-full"
+                [ngClass]="getCaraClase(diente, 'caraLingual')"
+              ></div>
+            </div>
+          </div>
+          <div class="m-1"></div>
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of teethRight; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-content-center mb-6">
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of subTeethLeft; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="m-2"></div>
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of subTeethRight; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="contenedorInferior">
+        <div class="flex flex-wrap justify-content-center mb-1">
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of upTeethBottomLeft; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="m-2"></div>
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of upTeethBottomRight; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap justify-content-center">
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of teethBottomLeft; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="m-2"></div>
+          <div class="flex flex-wrap gap-1">
+            <div
+              *ngFor="let diente of teethBottomRight; let i = index"
+              (click)="openModal(diente)"
+              class="cursor-pointer"
+            >
+              <p class="text-center">{{ diente }}</p>
+              <div class="flex flex-column align-items-center border-2">
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraVestibular')"
+                ></div>
+                <div class="flex">
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraMesial')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraOclusal')"
+                  ></div>
+                  <div
+                    class="border-2 m-auto p-2"
+                    [ngClass]="getCaraClase(diente, 'caraDistal')"
+                  ></div>
+                </div>
+                <div
+                  class="border-2 m-auto p-2 w-full"
+                  [ngClass]="getCaraClase(diente, 'caraLingual')"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col md:col-12 justify-content-center">
+    <div class="flex flex-wrap gap-2 justify-content-center align-content-center">
+      <div class="flex flex-wrap align-items-center justify-content-center">
+        <h1 class="text-blue-800 text-center">
+          {{ odontograma ? "Actualizar odontograma" : "Guardar odontograma" }}
+        </h1>
+      </div>
+      <div class="flex flex-wrap gap-2 align-items-center justify-content-center">
+        <shared-button
+          [icon]="odontograma ? 'pi pi-pencil' : 'pi pi-save'"
+          [label]="odontograma ? 'Actualizar' : 'Guardar'"
+          [color]="odontograma ? 'warning' : 'success'"
+          [rounded]="true"
+          (click)="odontograma ? editOdontograma() : addOdontograma()"
+        ></shared-button>
+        <shared-button
+          icon="pi pi-times-circle"
+          label="Salir"
+          color="danger"
+          [rounded]="true"
+          (click)="_uS.routerLink('/admin/odontogramas')"
+        ></shared-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <p-dialog
+      header="Detalles del Diente"
+      [(visible)]="displayModal"
+      [modal]="true"
+      [style]="{ width: '95vw' }"
+    >
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div
+          class="flex flex-wrap gap-1 align-items-center justify-content-center"
+          formArrayName="dientes"
+        >
+          <div
+            class="flex flex-wrap align-items-center justify-content-center"
+            *ngFor="
+              let dienteControl of dienteFormArray.controls;
+              let i = index
+            "
+          >
+            <div
+              class="flex flex-wrap gap-1 align-items-center justify-content-center"
+              [formGroupName]="i"
+            >
+              <h1 class="text-blue-800">
+                Pieza: {{ dienteControl.get("diente").value }}
+              </h1>
+              <div
+                class="flex flex-wrap gap-2 align-items-center justify-content-center mb-2"
+              >
+                <div *ngFor="let cara of caras">
+                  <div class="w-14rem" [formGroupName]="cara.formControlName">
+                    <p-multiSelect
+                      [showHeader]="false"
+                      [options]="enfermedades"
+                      [style]="{ width: '100%' }"
+                      [placeholder]="cara.placeholder"
+                      formControlName="enfermedad"
+                    ></p-multiSelect>
+                  </div>
+                </div>
+
+                <textarea
+                  rows="5"
+                  cols="30"
+                  pInputTextarea
+                  placeholder="Detalles del exámen dental..."
+                  class="mb-1 md:w-28rem"
+                  formControlName="observaciones"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-content-center align-content-center">
+          <shared-button
+            [icon]="odontograma ? 'pi pi-pencil' : 'pi pi-save'"
+            [label]="odontograma ? 'Actualizar' : 'Guardar'"
+            [color]="odontograma ? 'warning' : 'success'"
+            [rounded]="true"
+            type="submit"
+          ></shared-button>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+</div>
+<p-divider />
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>

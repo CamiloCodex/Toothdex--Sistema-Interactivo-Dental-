@@ -1,0 +1,82 @@
+<p-confirmDialog></p-confirmDialog>
+
+<p-toast
+  [breakpoints]="{ '920px': { width: '80%', right: '20', left: '20' } }"
+/>
+
+<div class="flex flex-wrap gap-2 align-items-center justify-content-center">
+  <p class="text-center">Contrato de Prestación de Servicios</p>
+  <shared-button
+    (click)="confirm()"
+    label="Ver contrato"
+    icon="pi pi-external-link"
+    [disabled]="isInvalid()"
+    color="help"
+  />
+</div>
+
+<p-dialog
+  [(visible)]="displayContract"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '90vw' }"
+>
+  <div class="p-4">
+    <div class="flex align-items-center justify-content-center">
+      <img src="./assets/logo.png" class="mr-2 h-4rem md:h-10rem" />
+    </div>
+    <h1 class="text-center text-blue-800">Términos del Contrato</h1>
+    <p class="text-justify md:p-4">
+      Yo <strong>{{ name }} {{ lastname }}</strong> con C.C:
+      <strong>{{ cedula }}</strong> declaro haber recibido explicación completa
+      y clara sobre el procedimieto a realizar y acepto el tratamiento
+      propuesto, comprometiéndome a colaborar para su éxito y, autorizo al
+      Dr(a): <strong>{{ user.name }}</strong> para realizar el tratamiento de:
+      <strong>{{ tratamiento }}</strong> que aparece en la historia clínica.
+      <br />
+      <br />
+      Me comprometo a pagar una cuota inicial de
+      <strong> {{ valorInicial | currency }} </strong> y
+      <strong> {{ numeroCuotas }} </strong> cuotas mensuales de
+      <strong> {{ valorPorCuotas | currency }} </strong>
+      a partir de la fecha (Este valor no incluye extracciones, amalgamas,
+      retenedores finales, brackets, ni reparaciones de la aparatología que se
+      requieren durante el tratamiento. Estas reparaciones tendrán un costo
+      adicional).
+      <br /><br />
+
+      Soy consciente del tratamiento a realizar, conozco sus limitaciones y las
+      consecuencias de no realizarlo, respecto a eso exonero al Dr(a):
+      <strong>{{ user.name }}</strong> de toda responsabilidad sobre posibles
+      efectos y otras complicaciones que puedan surgir durante el tratamiento
+      por no cumplir adecuadamente mis citas y no realizar adecuadamente mi
+      higiene oral, o por no atender las recomendaciones dadas por el Dr(a):
+      <strong>{{ user.name }}</strong
+      >. <br />
+      <br />
+      <strong
+        >Los pagos parciales o totales del tratamiento son destinados a cubrir
+        el costo de los materiales y procedimientos del tratamiento, por esa
+        razón no se realiza devolución del dinero.</strong
+      >
+      <br />
+    </p>
+  </div>
+  <ng-template pTemplate="footer">
+    <!-- <button
+      type="button"
+      pButton
+      icon="pi pi-print"
+      label="Imprimir"
+      (click)="onContractAccept()"
+    ></button> -->
+    <button
+      type="button"
+      pButton
+      icon="pi pi-times-circle"
+      label="Cerrar"
+      (click)="onContractReject()"
+      class="p-button-danger"
+    ></button>
+  </ng-template>
+</p-dialog>

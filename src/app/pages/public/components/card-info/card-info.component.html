@@ -1,0 +1,82 @@
+<p-card [styleClass]="'h-full shadow-4 border-round-2xl hover:shadow-8 transition-all transition-duration-300'">
+  <div class="flex flex-column gap-4 h-full">
+    <div class="relative">
+      <img
+        [src]="'/assets/' + img"
+        [alt]="title"
+        class="w-full border-round-xl h-12rem object-cover"
+      />
+      <div class="absolute bottom-0 left-0 right-0 p-3 bg-primary-700 opacity-90 border-round-bottom-xl">
+        <h3 class="text-white font-bold text-xl m-0">{{title}}</h3>
+      </div>
+    </div>
+
+    <div class="p-3">
+      <p class="text-secondary line-height-3 m-0">
+        {{description}}
+      </p>
+
+      <div class="flex justify-content-between align-items-center mt-4">
+        <p-button
+          label="Ver detalles"
+          icon="pi pi-info-circle"
+          styleClass="p-button-rounded p-button-outlined"
+          (onClick)="showDialog()">
+        </p-button>
+      </div>
+    </div>
+  </div>
+</p-card>
+
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{width: '90%', maxWidth: '500px'}"
+  [showHeader]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="p-3"
+  [header]="title">
+
+  <div class="flex flex-column gap-4">
+    <img
+      [src]="'/assets/' + img"
+      [alt]="title"
+      class="w-full border-round-xl h-15rem object-cover"
+    />
+
+    <div class="flex flex-column gap-3">
+      <h4 class="font-bold text-primary text-xl m-0">Descripción del servicio</h4>
+      <p class="line-height-3 text-secondary m-0">
+        {{description}}
+      </p>
+
+      <div class="flex flex-column gap-2">
+        <h4 class="font-bold text-primary text-lg m-0">Beneficios</h4>
+        <ul class="list-none p-0 m-0">
+          <li class="flex align-items-center gap-2 mb-2">
+            <i class="pi pi-check-circle text-primary"></i>
+            <span>Atención personalizada</span>
+          </li>
+          <li class="flex align-items-center gap-2 mb-2">
+            <i class="pi pi-check-circle text-primary"></i>
+            <span>Tecnología avanzada</span>
+          </li>
+          <li class="flex align-items-center gap-2">
+            <i class="pi pi-check-circle text-primary"></i>
+            <span>Resultados garantizados</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-calendar"
+      label="Agendar cita"
+      styleClass="p-button-rounded"
+      (onClick)="scheduleAppointment()">
+    </p-button>
+  </ng-template>
+</p-dialog>
