@@ -1,5 +1,5 @@
-# Gestión Odontológica Creado Por KennerEspinalDev
-_Sistema desarrollado por KennerDev_
+# Toothdex- Sistema Interactivo Dental 
+_Sistema desarrollado por Camilo Sierra_
 
 <div align="center">
 
