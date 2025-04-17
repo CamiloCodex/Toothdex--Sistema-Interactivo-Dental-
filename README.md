@@ -1,5 +1,5 @@
 # Toothdex- Sistema Interactivo Dental 
-_Sistema desarrollado por Camilo Sierra_
+_Sistema desarrollado por Camilo Sierra _
 
 <div align="center">
 
